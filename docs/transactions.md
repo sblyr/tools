@@ -11,6 +11,8 @@ This action will create two operations:
 - an insert operation that contains an entity created based on the schema, hooks and the data provided to the action.
 - an insert operation that contains an event entity describing the create action.
 ```js
+const createTransaction = require('@sublayer/tools/transaction/createTransaction')
+
 const schema = {
     ModelDatas: {
         Person: {
@@ -97,6 +99,8 @@ This action will create two (or more based on the fields that have been changed)
 - an insert operation for each field that has been updated that contains an event entity describing the previous and current value of the field.
 
 ```js
+const createTransaction = require('@sublayer/tools/transaction/createTransaction')
+
 const schema = {
     ModelDatas: {
         Person: {
@@ -218,6 +222,8 @@ This action will create two operations:
 - an insert operation that contains an event entity indicating the removal of the entity alongside the entity that has been removed.
 
 ```js
+const createTransaction = require('@sublayer/tools/transaction/createTransaction')
+
 const schema = {
     ModelDatas: {
         Person: {
