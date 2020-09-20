@@ -1,4 +1,4 @@
-const { assert } = require('chai')
+const expect = require('expect')
 const parseJSON = require('./parseJSON')
 
 describe('Utils', () => {
@@ -13,14 +13,14 @@ describe('Utils', () => {
                 JSON.stringify(input)
             )
 
-            assert.deepEqual(result, input)
+            expect(result).toEqual(input)
         })
 
         it("should return null when it's not a valid stringified object", () => {
 
             const result = parseJSON("invalid input")
 
-            assert.equal(result, null)
+            expect(result).toBe(null)
         })
     })
 })

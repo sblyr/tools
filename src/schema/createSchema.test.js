@@ -1,4 +1,4 @@
-const { assert } = require('chai')
+const expect = require('expect')
 const fs = require('fs')
 const uuid = require('uuid')
 const createSchema = require('./createSchema')
@@ -71,7 +71,7 @@ describe('Schema', () => {
 
       const schema = createSchema({ configPath: tmp_file })
 
-      assert.deepEqual(schema.Model, ['Customer', 'Quote'])
+      expect(schema.Model).toMatchObject(['Customer', 'Quote'])
     })
   })
 })

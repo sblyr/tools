@@ -1,4 +1,4 @@
-const { assert } = require('chai')
+const expect = require('expect')
 const stringifyJSON = require('./stringifyJSON')
 
 describe('Utils', () => {
@@ -14,7 +14,7 @@ describe('Utils', () => {
                 input
             )
 
-            assert.deepEqual(result, expected)
+            expect(result).toEqual(expected)
         })
     })
 })
