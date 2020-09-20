@@ -1,6 +1,6 @@
+const { assert } = require('chai')
 const fs = require('fs')
 const uuid = require('uuid')
-const tap = require('tap')
 const createSchema = require('./createSchema')
 
 const schema_string = `
@@ -59,15 +59,19 @@ spec:
         includeTime: true
 `
 
-const tmp_file = `/tmp/${uuid.v4()}.yaml`
+describe('Schema', () => {
 
-fs.writeFileSync(tmp_file, schema_string)
+  describe('#createSchema()', () => {
 
-tap.test("createSchema(): should create a schema", assert => {
+    it("should create a schema", () => {
 
-    const schema = createSchema({ configPath: tmp_file })
+      const tmp_file = `/tmp/${uuid.v4()}.yaml`
 
-    assert.same(schema.Model, ['Customer', 'Quote'])
+      fs.writeFileSync(tmp_file, schema_string)
 
-    assert.end()
+      const schema = createSchema({ configPath: tmp_file })
+
+      assert.deepEqual(schema.Model, ['Customer', 'Quote'])
+    })
+  })
 })

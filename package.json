@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tap"
+    "test:watch": "./node_modules/mocha/bin/mocha -w src/**/*.test.js",
+    "test": "./node_modules/mocha/bin/mocha src/**/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -18,11 +19,13 @@
   },
   "homepage": "https://github.com/sublayerio/tools#readme",
   "dependencies": {
-    "js-yaml": "^3.14.0"
+    "js-yaml": "^3.14.0",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "jest": "^26.4.2",
-    "tap": "^14.10.8",
+    "mocha": "^8.1.3",
     "uuid": "^8.3.0"
   }
 }
