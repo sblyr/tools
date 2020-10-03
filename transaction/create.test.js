@@ -62,7 +62,9 @@ describe('Transaction', () => {
             }
 
             const hooks = {
-                "formula/Person.name": () => ({ firstName, lastName }) => [firstName, lastName].join(' ')
+                "formula/Person.name": [
+                    () => ({ firstName, lastName }) => [firstName, lastName].join(' ')
+                ]
             }
 
             const ctx = { schema, hooks }

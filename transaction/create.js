@@ -1,5 +1,6 @@
 const assert = require('assert')
 const uuid = require('uuid')
+const isArray = require('lodash/isArray')
 
 const defaultFieldTypeResolver = () => () => null
 
@@ -29,7 +30,7 @@ const getData = ctx => (model, input) => {
         let value = null
 
         const fieldTypeResolver = getFieldTypeResolver(type)
-        
+
         value = fieldTypeResolver(ctx)(data, resolverCtx)
 
         data[id] = value
@@ -54,7 +55,13 @@ const getData = ctx => (model, input) => {
             : null
 
         if (formulaResolver) {
-            value = formulaResolver(ctx)(data, resolverCtx)
+
+            if (!isArray(formulaResolver)) {
+                throw new Error(`hooks["formula/${hookId}"] formula hook should contain an array of fields it's dependent on with the last element of the array being the formula function.`)
+            }
+
+            const formulaResolverFn = [...formulaResolver].pop()
+            value = formulaResolverFn(ctx)(data, resolverCtx)
             data[id] = value
         }
 
