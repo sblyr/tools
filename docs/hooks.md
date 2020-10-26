@@ -35,7 +35,11 @@ const hooks = {
         }
     },
     // shorthand version: matches the name field on the Person model
-    "formula/Person.name": ctx => ({ firstName, lastName }) => [firstName, lastName].join(' ')
+    "formula/Person.name": [
+        "firstName",
+        "lastName",
+        ctx => ({ firstName, lastName }) => [firstName, lastName].join(' ')
+    ]
 }
 
 const ctx = { hooks }

@@ -21,6 +21,10 @@ const getData = ctx => (model, input) => {
 
     return model.fields.reduce((data, field) => {
 
+        if (field.virtual) {
+            return data
+        }
+
         const { id, type } = field
 
         const hookId = [model.id, field.id].join('.')
@@ -99,7 +103,8 @@ const create = ctx => ({ modelId, data: input = {} }) => {
                     entityType: modelId,
                     entityId: data.id,
                     entity: data
-                }
+                },
+                createdAt: new Date()
             }
         })
 

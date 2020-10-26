@@ -9,6 +9,4 @@ services:
     working_dir: /app
     volumes:
       - ./:/app
-    ports:
-      - 5011:3000
     command: ./entrypoint.sh
