@@ -197,13 +197,13 @@ describe('Storage', () => {
 
                 // expect(statements).toMatchObject([
                 //     {
-                //         query: 'INSERT INTO persons (`id`, `firstName`, `lastName`, `name`) SET ?',
+                //         query: 'INSERT INTO persons (`id`, `firstName`, `lastName`, `name`) VALUES ?',
                 //         bindings: [
                 //             times(1000).map(() => expect.anything())
                 //         ]
                 //     },
                 //     {
-                //         query: 'INSERT INTO persons (`id`, `firstName`, `lastName`, `name`) SET ?',
+                //         query: 'INSERT INTO persons (`id`, `firstName`, `lastName`, `name`) VALUES ?',
                 //         bindings: [
                 //             times(500).map(() => expect.anything())
                 //         ]

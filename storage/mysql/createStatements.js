@@ -63,7 +63,7 @@ const transformers = {
         )
 
         return {
-            query: `INSERT INTO ${model.tableName} (${escaped_fields.join(', ')}) SET ?`,
+            query: `INSERT INTO ${model.tableName} (${escaped_fields.join(', ')}) VALUES ?`,
             bindings: [
                 valueObjects
             ]
