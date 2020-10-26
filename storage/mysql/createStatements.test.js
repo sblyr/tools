@@ -109,7 +109,7 @@ describe('Storage', () => {
 
                 expect(statements).toMatchObject([
                     {
-                        query: 'INSERT INTO persons (`id`, `firstName`, `lastName`, `name`) SET ?',
+                        query: 'INSERT INTO persons (`id`, `firstName`, `lastName`, `name`) VALUES ?',
                         bindings: [
                             [
                                 [expect.anything(), 'Luke', 'Skywalker', 'Luke Skywalker'],
