@@ -35,7 +35,39 @@ const transformers = {
     insert: (operation, { model }) => ({
         query: `INSERT INTO ${model.tableName} SET ?`,
         bindings: parseData(operation.payload.data, { model })
-    })
+    }),
+    batchInsert: (operation, { model }) => {
+
+        const rows = operation.payload.rows.map(row => {
+            return parseData(row, { model })
+        })
+
+        let fields = {}
+
+        rows.forEach(row => {
+            const keys = Object.keys(row)
+            keys.forEach(key => {
+                fields[key] = true
+            })
+        })
+
+        fields = Object.keys(fields)
+
+        const escaped_fields = fields.map(field => '`' + field + '`')
+
+        const valueObjects = rows.map(row =>
+            fields.map(field =>
+                row.hasOwnProperty(field) ? row[field] : null
+            )
+        )
+
+        return {
+            query: `INSERT INTO ${model.tableName} (${escaped_fields.join(', ')}) SET ?`,
+            bindings: [
+                valueObjects
+            ]
+        }
+    }
 }
 
 const operationToStatement = ctx => operation => {
@@ -52,9 +84,53 @@ const operationToStatement = ctx => operation => {
     return transformer(operation, { model })
 }
 
-const createStatements = ctx => transaction => {
+const combineOperations = () => operations => {
 
-    const { operations } = transaction
+    const data = operations.reduce((result, operation) => {
+
+        if (operation.type === 'insert') {
+            const combineOperationKey = [operation.payload.modelId, 'insert'].join(':')
+            let combineOperation = result.combinedDatas[combineOperationKey]
+
+            if (!combineOperation) {
+
+                combineOperation = {
+                    type: 'batchInsert',
+                    payload: {
+                        modelId: operation.payload.modelId,
+                        rows: []
+                    }
+                }
+
+                result.combinedDatas[combineOperationKey] = combineOperation
+                result.combined.push(combineOperationKey)
+            }
+
+            combineOperation.payload.rows.push(operation.payload.data)
+            return result
+        }
+
+        result.operations.push(operation)
+        return result
+    }, {
+        operations: [],
+        combinedDatas: {},
+        combined: []
+    })
+
+    return [
+        ...data.operations,
+        ...data.combined.map(key => data.combinedDatas[key])
+    ]
+}
+
+const createStatements = ctx => (transaction, { combine = false } = { combine: false }) => {
+
+    let { operations } = transaction
+
+    if (combine) {
+        operations = combineOperations(ctx)(operations)
+    }
 
     return operations.map(operation =>
         operationToStatement(ctx)(operation)
