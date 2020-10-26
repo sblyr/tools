@@ -1,4 +1,5 @@
 const assert = require('assert')
+const chunk = require('lodash/chunk')
 const scalarTypes = require('./scalarTypes')
 
 const parseData = (data, { model }) => {
@@ -118,9 +119,38 @@ const combineOperations = () => operations => {
         combined: []
     })
 
+    combined = data.combined
+        .reduce((result, key) => {
+            const operation = data.combinedDatas[key]
+
+            // When it's type of batchInsert
+            // Split the operation into separate 1000 row operations due to MySQL limitations
+            if (operation.type === 'batchInsert') {
+                const chunks = chunk(operation.payload.rows, 1000)
+
+                const operations = chunks.map(chunk => ({
+                    type: 'batchInsert',
+                    payload: {
+                        modelId: operation.payload.modelId,
+                        rows: chunk
+                    }
+                }))
+
+                return [
+                    ...result,
+                    ...operations
+                ]
+            }
+
+            result.push(operation)
+
+            return result
+
+        }, [])
+
     return [
         ...data.operations,
-        ...data.combined.map(key => data.combinedDatas[key])
+        ...combined
     ]
 }
 
