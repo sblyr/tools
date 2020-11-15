@@ -1,23 +1,104 @@
 # Field Types
 
-- id
-- [text](#text)
-- [number](#number)
-- [singleSelect](#single-select)
-- [relationship](#relationship)
-- [boolean](#boolean)
-- date
-- longText
-- json
-- button
+- [Field Types](#field-types)
+  - [Text](#text)
+    - [Phone](#phone)
+    - [Email](#email)
+    - [URL](#url)
+  - [Long text](#long-text)
+    - [HTML](#html)
+    - [Markdown](#markdown)
+    - [Code](#code)
+  - [Number](#number)
+    - [Float](#float)
+    - [Integer](#integer)
+    - [Decimal](#decimal)
+    - [Currency](#currency)
+    - [Percentage](#percentage)
+    - [Progress Bar](#progress-bar)
+  - [Single select](#single-select)
+  - [Relationship](#relationship)
+    - [Has One](#has-one)
+    - [Has Many](#has-many)
+  - [Boolean](#boolean)
+    - [Checkbox](#checkbox)
+    - [Toggle](#toggle)
+  - [Date](#date)
+    - [Date only](#date-only)
+    - [Include time](#include-time)
+  - [Json](#json)
+  - [Button](#button)
 
 ## Text
 
-Definition
 ```yaml
 id: author
 name: Author
 type: text
+```
+
+### Phone
+
+```yaml
+id: phone
+name: Phone
+type: text
+displayType: phone
+```
+
+### Email
+
+```yaml
+id: email
+name: Email
+type: text
+displayType: email
+```
+
+### URL
+
+```yaml
+id: url
+name: URL
+type: text
+displayType: url
+settings:
+  baseURL: https://sublayer.io/product
+```
+
+## Long text
+
+```yaml
+id: notes
+name: Notes
+type: longText
+```
+
+### HTML
+
+```yaml
+id: html
+name: HTML
+type: longText
+displayType: html
+```
+
+### Markdown
+
+```yaml
+id: markdown
+name: Markdown
+type: longText
+displayType: markdown
+```
+
+### Code
+
+```yaml
+id: code
+name: Code
+type: longText
+displayType: code
 ```
 
 ## Number
@@ -94,7 +175,6 @@ displayType: progressBar
 
 ## Single select
 
-Definition
 ```yaml
 id: formatOwned
 name: Format Owned
@@ -139,7 +219,7 @@ Output:
 }
 ```
 
-Icons
+Options with prefix / suffix
 
 ```yaml
 id: weatherType
@@ -173,4 +253,64 @@ type: relationship
 settings:
   type: hasMany
   foreignModel: Author
+```
+
+## Boolean
+
+### Checkbox
+
+```yaml
+id: boolean_checkbox
+type: boolean
+settings:
+  trueLabel: On
+  falseLabel: Off
+```
+### Toggle
+
+```yaml
+id: boolean_toggle
+type: boolean
+settings:
+  ui: toggle
+```
+
+
+## Date
+
+### Date only
+
+```yaml
+id: date
+name: Date
+type: date
+settings:
+  includeTime: false
+```
+
+### Include time
+
+```yaml
+id: date
+name: Date
+type: date
+settings:
+  includeTime: false
+```
+
+## Json
+
+```yaml
+id: data
+type: json
+```
+
+## Button
+
+```yaml
+id: sendMessageButton
+type: button
+settings:
+  label: Send a message
+  variant: primary
 ```
