@@ -295,7 +295,7 @@ id: date
 name: Date
 type: date
 settings:
-  includeTime: false
+  includeTime: true
 ```
 
 ## Json
