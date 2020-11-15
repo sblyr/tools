@@ -248,11 +248,16 @@ settings:
 ### Has Many
 
 ```yaml
-id: relationship_hasOne
+id: popularAuthors
+name: Popular Authors
 type: relationship
 settings:
   type: hasMany
   foreignModel: Author
+data:
+  query: WHERE popularity > 5 ORDER BY popularity DESC
+  bindings:
+    - ${source.id}
 ```
 
 ## Boolean
