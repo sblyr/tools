@@ -23,23 +23,28 @@ When a field is derived from other fields within the table the `dependsOn` prope
 In schema:
 
 ```yaml
-fields:
-  - id: firstName
-    type: text
-  - id: lastName
-    type: text
-  - id: name
-    type: text
-    dependsOn:
-      - firstName
-      - lastName
+apiVersion: 1
+kind: Table
+spec:
+  id: Person
+  fields:
+    - id: firstName
+      type: text
+    - id: lastName
+      type: text
+    - id: name
+      type: text
+      virtual: true
+      dependsOn:
+        - firstName
+        - lastName
 ```
 
 In hooks:
 
 ```js
 const hooks = {
-  "formula": ({ firstName, lastName }) => [firstName, lastName].join(' ')
+  "formula/Person.name": ({ firstName, lastName }) => [firstName, lastName].join(' ')
 }
 ```
 
