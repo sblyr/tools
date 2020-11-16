@@ -14,7 +14,9 @@ const client = createClient()
 ```js
 const [record] = await client.persons.create([
     {
-        name: 'Luke Skywalker'
+        fields: {
+            name: 'Luke Skywalker'
+        }
     }
 ])
 ```
@@ -24,10 +26,29 @@ const [record] = await client.persons.create([
 ```js
 const [lukeSkywalker, r2d2] = await client.persons.create([
     {
-        name: 'Luke Skywalker'
+        fields: {
+            name: 'Luke Skywalker'
+        }
     },
     {
-        name: 'R2-D2
+        fields: {
+            name: 'R2-D2
+        }
+    }
+])
+```
+
+> Triggers `record/batchCreated` event. For more info see [events](/docs/event.md).
+
+## Update a record
+
+```js
+const [lukeSkywalker] = await client.persons.update([
+    {
+        id: 'fa382609-4453-410c-a13f-728804e56ed3',
+        fields: {
+            name: 'Skywalker'
+        }
     }
 ])
 ```

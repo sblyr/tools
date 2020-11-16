@@ -74,6 +74,31 @@ Contains the created record.
 }
 ```
 
+### record/batchCreated
+
+```json
+{
+  "type": "record/batchCreated",
+  "tableId": "Person",
+  "recordId": "04345518-a1a6-481d-ae06-f3eabde46f02",
+  "createdAt": "2020-11-16T15:13:51.200Z",
+  "payload": [
+    {
+      "record": {
+        "id": "04345518-a1a6-481d-ae06-f3eabde46f02",
+        "name": "Luke Skywalker"
+      }
+    },
+    {
+      "record": {
+        "id": "37ddccfb-fc05-4691-a177-94620d2fd55b",
+        "name": "R2-D2"
+      }
+    }
+  ]
+}
+```
+
 ### record/updated
 
 Contains the previous record, the current record and a list of changes that describes the previous and next values of the fields that have been changed.
@@ -115,6 +140,7 @@ Contains the deleted record.
   "recordId": "04345518-a1a6-481d-ae06-f3eabde46f02",
   "createdAt": "2020-11-16T15:13:51.200Z",
   "payload": {
+    "isBatch": false,
     "record": {
       "id": "04345518-a1a6-481d-ae06-f3eabde46f02",
       "name": "Luke Skywalker"
@@ -131,6 +157,9 @@ The following events are being generated when the above events are triggered. Th
 | name                                       | extends          | description                                                   |
 | ------------------------------------------ | ---------------- | ------------------------------------------------------------- |
 | `table/{tableId}/record/created`           | `record/created` | When a record in a specific table has been created            |
+| `table/{tableId}/record/batchCreated`      | `record/created` | When a record in a specific table has been created            |
 | `table/{tableId}/record/updated`           | `record/updated` | When a record in a specific table has been updated            |
+| `table/{tableId}/record/batchUpdated`      | `record/updated` | When a record in a specific table has been updated            |
 | `table/{tableId}/record/deleted`           | `record/deleted` | When a record in a specific table has been deleted            |
+| `table/{tableId}/record/batchUpdated`      | `record/deleted` | When a record in a specific table has been deleted            |
 | `table/{tableId}/record/{fieldId}/updated` | `record/updated` | When a field of a record in a specific table has been updated |
