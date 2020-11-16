@@ -1,6 +1,6 @@
 # Schema
 
-Schema manifests are used to define resources such as [tables](/docs/table.md), [fields](/docs/field.md), [views](/docs/view.md), [layouts](/docs/layout.md), [nav items](/docs/nav-item.md), [table pages](/docs/table-page.md) and [record pages](/docs/record-page.md).
+Schema manifests are used to define resources such as [tables](/docs/table.md), [fields](/docs/field.md), [views](/docs/view.md), [layouts](/docs/layout.md), [sidebar](/docs/sidebar.md), [table pages](/docs/table-page.md) and [record pages](/docs/record-page.md).
 
 ## Resource types
 

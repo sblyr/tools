@@ -1,6 +1,6 @@
 # View
 
-A view can contain the following properties:
+A view is one of the resources that can be defined in the [schema](/docs/schema.md) and contains the following properties:
 
 | name | description |
 | --- | --- |
