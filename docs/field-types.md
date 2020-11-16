@@ -2,38 +2,60 @@
 
 - [Field Types](#field-types)
   - [Text](#text)
-    - [Phone](#phone)
-    - [Email](#email)
-    - [URL](#url)
+    - [Settings](#settings)
+    - [Examples](#examples)
+      - [Phone](#phone)
+      - [Email](#email)
+      - [URL](#url)
   - [Long text](#long-text)
-    - [HTML](#html)
-    - [Markdown](#markdown)
-    - [Code](#code)
+    - [Settings](#settings-1)
+    - [Examples](#examples-1)
+      - [HTML](#html)
+      - [Markdown](#markdown)
+      - [Code](#code)
   - [Number](#number)
-    - [Float](#float)
-    - [Integer](#integer)
-    - [Decimal](#decimal)
-    - [Currency](#currency)
-    - [Percentage](#percentage)
-    - [Progress Bar](#progress-bar)
+    - [Settings](#settings-2)
+    - [Examples](#examples-2)
+      - [Float](#float)
+      - [Integer](#integer)
+      - [Decimal](#decimal)
+      - [Currency](#currency)
+      - [Percentage](#percentage)
+      - [Progress Bar](#progress-bar)
   - [Select](#select)
-    - [Single select](#single-select)
-    - [Multiple select](#multiple-select)
+    - [Settings](#settings-3)
+      - [Option](#option)
+      - [Custom color](#custom-color)
+    - [Examples](#examples-3)
+      - [Single select](#single-select)
+      - [Multiple select](#multiple-select)
     - [Options with prefix / suffix](#options-with-prefix--suffix)
   - [Relationship](#relationship)
-    - [Has One](#has-one)
-    - [Has Many](#has-many)
+    - [Settings](#settings-4)
+    - [Examples](#examples-4)
+      - [Has One](#has-one)
+      - [Has Many](#has-many)
   - [Boolean](#boolean)
-    - [Checkbox](#checkbox)
-    - [Toggle](#toggle)
+    - [Settings](#settings-5)
+    - [Examples](#examples-5)
+      - [Checkbox](#checkbox)
+      - [Toggle](#toggle)
   - [Date](#date)
-    - [Date only](#date-only)
-    - [Include time](#include-time)
+    - [Settings](#settings-6)
+    - [Examples](#examples-6)
+      - [Date only](#date-only)
+      - [Include time](#include-time)
   - [Attachment](#attachment)
   - [Json](#json)
   - [Button](#button)
 
 ## Text
+
+### Settings
+
+| setting | description |
+| --- | --- |
+| ui | How the field should be displayed. Possible values: `text`, `phone`, `email`, `url`. Defaults to `text`. |
 
 ```yaml
 id: author
@@ -41,36 +63,46 @@ name: Author
 type: text
 ```
 
-### Phone
+### Examples
+
+#### Phone
 
 ```yaml
 id: phone
 name: Phone
 type: text
-displayType: phone
+settings:
+  ui: phone
 ```
 
-### Email
+#### Email
 
 ```yaml
 id: email
 name: Email
 type: text
-displayType: email
+settings: 
+  ui: email
 ```
 
-### URL
+#### URL
 
 ```yaml
 id: url
 name: URL
 type: text
-displayType: url
 settings:
+  ui: url
   baseURL: https://sublayer.io/product
 ```
 
 ## Long text
+
+### Settings
+
+| setting | description |
+| --- | --- |
+| ui | How the field should be displayed. Possible values: `longText`, `html`, `markdown`, `code`. Defaults to `longText`. |
 
 ```yaml
 id: notes
@@ -78,36 +110,52 @@ name: Notes
 type: longText
 ```
 
-### HTML
+### Examples
+
+#### HTML
 
 ```yaml
 id: html
 name: HTML
 type: longText
-displayType: html
+settings: 
+  ui: html
 ```
 
-### Markdown
+#### Markdown
 
 ```yaml
 id: markdown
 name: Markdown
 type: longText
-displayType: markdown
+settings:
+  ui: markdown
 ```
 
-### Code
+#### Code
 
 ```yaml
 id: code
 name: Code
 type: longText
-displayType: code
+settings:
+  ui: code
 ```
 
 ## Number
 
-### Float
+### Settings
+
+| setting | description |
+| --- | --- |
+| ui | How the field should be displayed. Possible values: `number`, `currency`, `percentage`, `progressBar`. Defaults to `number`. |
+| format | How the field should be displayed. Possible values: `float`, `decimal`, `integer`. Defaults to `integer`. |
+| precision | Only applicable for `format` of `decimal`. How many digits after the decimal. Defaults to `2`. E.g. `€ 10.50` |
+| allowNegativeNumbers | Whether negative values should be allowed. Defaults to `true`. |
+
+### Examples
+
+#### Float
 
 ```yaml
 id: number_float
@@ -118,7 +166,7 @@ settings:
 # output: 1.234
 ```
 
-### Integer
+#### Integer
 
 ```yaml
 id: number_integer
@@ -129,7 +177,7 @@ settings:
 # output: 1
 ```
 
-### Decimal
+#### Decimal
 
 ```yaml
 id: number_decimal
@@ -141,43 +189,46 @@ settings:
 # output: 10.20
 ```
 
-### Currency
+#### Currency
 
 ```yaml
 id: number_currency
 type: number
 settings:
+  ui: currency
   format: decimal
   precision: 2
-  ui: currency
 
 # output: € 10.20
 ```
 
-### Percentage
+#### Percentage
 
 ```yaml
 id: number_percentage
 type: number
 settings:
+  ui: percentage
   format: decimal
   precision: 2
-  ui: percentage
 
 # output: 10.20%
 ```
 
-### Progress Bar
+#### Progress Bar
 
 ```yaml
 id: number_progressbar
 type: number
-displayType: progressBar
+settings:
+  ui: progressBar
 
 # output: [=====     ] 50%
 ```
 
 ## Select
+
+### Settings
 
 | setting | description |
 | --- | --- |
@@ -186,7 +237,7 @@ displayType: progressBar
 | coloredOptions | Whether the options should appear colored or not. Defaults to `true`. |
 | options | List of options |
 
-Option properties:
+#### Option
 | property | description |
 | --- | --- |
 |  id | Unique identifier for the option |
@@ -194,14 +245,16 @@ Option properties:
 |  description | Longer description of the option |
 |  color | Define a color for the option. Either a preset: `blue`, `green`, `red`, `pink`, `yellow`. Or you can define your own colors by passing an object (see down below). By default each option will get a default color for it's index. |
 
-Custom color
+#### Custom color
 ```yaml
 color:
   backgroundColor: "#cfdfff"
   color: "#102046"
 ```
 
-### Single select
+### Examples
+
+#### Single select
 
 ```yaml
 id: formatOwned
@@ -218,7 +271,7 @@ settings:
       color: gray
 ```
 
-### Multiple select
+#### Multiple select
 
 ```yaml
 id: formatOwned
@@ -254,12 +307,16 @@ settings:
 
 ## Relationship
 
+### Settings
+
 | setting | description |
 | --- | --- |
 | type | Type of relationship. Possible value: `hasOne`, `hasMany`. Defaults to `hasOne`. |
 | foreignTable | The foreign table of the records being referenced. |
 
-### Has One
+### Examples
+
+#### Has One
 
 ```yaml
 id: relationship_hasOne
@@ -269,7 +326,7 @@ settings:
   foreignTable: Author
 ```
 
-### Has Many
+#### Has Many
 
 ```yaml
 id: popularAuthors
@@ -286,13 +343,18 @@ data:
 
 ## Boolean
 
+
+### Settings
+
 | setting | description |
 | --- | --- |
 | ui | How the field should be displayed. Possible values: `checkbox`, `toggle`. Defaults to `checkbox`. |
 | trueLabel | A label to be displayed when the value is `true`. Defaults to `null`. |
 | falseLabel | A label to be displayed when the value is `false`. Defaults to `null`. |
 
-### Checkbox
+### Examples
+
+#### Checkbox
 
 ```yaml
 id: boolean_checkbox
@@ -301,7 +363,7 @@ settings:
   trueLabel: On
   falseLabel: Off
 ```
-### Toggle
+#### Toggle
 
 ```yaml
 id: boolean_toggle
@@ -312,6 +374,8 @@ settings:
 
 ## Date
 
+### Settings
+
 | setting | description |
 | --- | --- |
 | includeTime | Whether to display the time. Defaults to `false` |
@@ -320,7 +384,9 @@ settings:
 
 > When you don't want to make use of the `dateFormat`, `timeFormat` defaults you can enter a custom format. The date field makes use of the [Moment.js](https://momentjs.com/) library for date formatting.
 
-### Date only
+### Examples
+
+#### Date only
 
 ```yaml
 id: date
@@ -330,7 +396,7 @@ settings:
   includeTime: false
 ```
 
-### Include time
+#### Include time
 
 ```yaml
 id: date
