@@ -35,6 +35,7 @@
     - [Examples](#examples-4)
       - [Has One](#has-one)
       - [Has Many](#has-many)
+      - [Polymorphic](#polymorphic)
   - [Boolean](#boolean)
     - [Settings](#settings-5)
     - [Examples](#examples-5)
@@ -312,7 +313,8 @@ settings:
 | setting | description |
 | --- | --- |
 | type | Type of relationship. Possible value: `hasOne`, `hasMany`. Defaults to `hasOne`. |
-| foreignTable | The foreign table of the records being referenced. |
+| foreignTable | The foreign table of the records being referenced. Defaults to `null` |
+| polymorphic | Whether the relationship is polymorphic. Defaults to `false`|
 
 ### Examples
 
@@ -339,6 +341,22 @@ data:
   query: WHERE popularity > 5 ORDER BY popularity DESC
   bindings:
     - ${source.id}
+```
+
+#### Polymorphic
+
+```yaml
+id: recordId
+name: Record
+type: relationship
+settings:
+  type: hasMany
+  polymorphic: true
+data:
+  query: WHERE id = ?
+  from: source.tableId
+  bindings:
+    - ${source.recordId}
 ```
 
 ## Boolean
