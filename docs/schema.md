@@ -20,6 +20,12 @@ Each field has a field type that determines what kind of information you can put
 ### Table Pages
 ### Record Pages
 
+## Serializable
+
+The schema doesn't contain any logic and is fully serializable. This makes for easy transfer to a client side application that can utilize (a part of) the schema to generate interface interactions.
+
+Most resources allow their logic to be influenced / replaced by [hooks](/docs/hooks.md).
+
 
 Example output:
 
