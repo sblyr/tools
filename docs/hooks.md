@@ -12,14 +12,14 @@ Hook into these actions to customize the default behaviour.
 ```js
 const hooks = {
     // matches any field
-    "defaultValue": ctx => (source, { modelId, fieldId }) => {
+    "defaultValue": (source, { modelId, fieldId }) => {
         
         if (modelId === 'Person' && fieldId === 'age') {
             return [firstName, lastName].join(' ')
         }
     },
     // shorthand version: matches the age field on the Person model
-    "defaultValue/Person.age": ctx => () => 25,
+    "defaultValue/Person.age": () => 25,
 }
 
 const ctx = { hooks }
@@ -28,18 +28,14 @@ const ctx = { hooks }
 ```js
 const hooks = {
     // matches any field
-    "formula": ctx => (source, { modelId, fieldId }) => {
+    "formula": (source, { modelId, fieldId }) => {
         
         if (modelId === 'Person' && fieldId === 'name') {
             return [firstName, lastName].join(' ')
         }
     },
     // shorthand version: matches the name field on the Person model
-    "formula/Person.name": [
-        "firstName",
-        "lastName",
-        ctx => ({ firstName, lastName }) => [firstName, lastName].join(' ')
-    ]
+    "formula/Person.name": ({ firstName, lastName }) => [firstName, lastName].join(' ')
 }
 
 const ctx = { hooks }
