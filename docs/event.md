@@ -1,6 +1,6 @@
 # Event
 
-Whenever a record get's created, updated or removed event's are emitted.
+Whenever a record get's created, updated or removed events are emitted.
 
 The default Event table looks as follows:
 
@@ -50,7 +50,7 @@ Listed below are base events, they contain information about changes in the syst
 | --------------------- | ---------------------------------------- |
 | `record/created`      | When a record has been created           |
 | `record/batchCreated` | When a batch of records has been created |
-| `record/created`      | When a record has been updated           |
+| `record/updated`      | When a record has been updated           |
 | `record/batchUpdated` | When a batch of records has been updated |
 | `record/deleted`      | When a record has been deleted           |
 | `record/batchDeleted` | When a batch of records has been deleted |
@@ -89,7 +89,7 @@ Contains the previous record, the current record and a list of changes that desc
       "id": "04345518-a1a6-481d-ae06-f3eabde46f02",
       "name": "Skywalker"
     },
-    "record": {
+    "next": {
       "id": "04345518-a1a6-481d-ae06-f3eabde46f02",
       "name": "Luke Skywalker"
     },
