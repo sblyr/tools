@@ -4,6 +4,7 @@ In order to write less code a client can be generated based on the schema. This 
 
 - [Client](#client)
   - [Create a client](#create-a-client)
+    - [Mutation Options](#mutation-options)
   - [Create records](#create-records)
   - [Read records](#read-records)
     - [MySQL](#mysql)
@@ -16,26 +17,51 @@ In order to write less code a client can be generated based on the schema. This 
 ## Create a client
 
 ```js
-const client = createClient()
+const client = createClient({
+    adapters: {
+        mysql
+    },
+    defaultMutationOptions: {
+        // Whether to write events to storage. When set to false the events will only be triggered on the events object. Defaults to `true`. Applicable to adapters: all.
+        writeEvents: false,
+        // Whether to wrap the queries executed in the mutation inside a transaction. This can be disabled to manually handle the transaction by executing `START TRANSACTION`, `COMMIT` / `ROLLBACK` yourself. Defaults to `true`. Applicable to adapters: `mysql`
+        withinTransaction: false // defaults to true
+    }
+})
+```
+
+
+### Mutation Options
+
+An extra param `mutationOptions` can be passed to the `create`, `update`, `delete` methods.
+
+```js
+const mutationOptions = {
+    // Whether to write events to storage. When set to false the events will only be triggered on the events object. Defaults to `true`. Applicable to adapters: all.
+    writeEvents: false,
+    // Whether to wrap the queries executed in the mutation inside a transaction. This can be disabled to manually handle the transaction by executing `START TRANSACTION`, `COMMIT` / `ROLLBACK` yourself. Defaults to `true`. Applicable to adapters: `mysql`
+    withinTransaction: false // defaults to true
+}
 ```
 
 ## Create records
 
 ```js
-const [lukeSkywalker, r2d2] = await client.persons.create([
-    {
-        fields: {
-            name: 'Luke Skywalker'
+const [lukeSkywalker, r2d2] = await client.persons.create(
+    [
+        {
+            fields: {
+                name: 'Luke Skywalker'
+            }
+        },
+        {
+            fields: {
+                name: 'R2-D2
+            }
         }
-    },
-    {
-        fields: {
-            name: 'R2-D2
-        }
-    }
-], {
-    writeEvents: false // defaults to true
-})
+    ],
+    mutationOptions // optional
+)
 ```
 
 > Triggers following events:
@@ -49,6 +75,8 @@ const [lukeSkywalker, r2d2] = await client.persons.create([
 ## Read records
 
 Reading records depends on the adapter that's configured for the table.
+
+Read more about [configuring storage adapters](/docs/storage/adapters.md)
 
 ### MySQL
 
@@ -95,22 +123,23 @@ const [record] = await client.persons.read({
 ## Update records
 
 ```js
-const [lukeSkywalker, r2d2] = await client.persons.update([
-    {
-        id: 'fa382609-4453-410c-a13f-728804e56ed3',
-        fields: {
-            name: 'Skywalker'
+const [lukeSkywalker, r2d2] = await client.persons.update(
+    [
+        {
+            id: 'fa382609-4453-410c-a13f-728804e56ed3',
+            fields: {
+                name: 'Skywalker'
+            }
+        },
+        {
+            id: '8cc17b4b-3eff-4a6d-9bfa-f9e046c69d4a',
+            fields: {
+                name: 'R2-D2'
+            }
         }
-    },
-    {
-        id: '8cc17b4b-3eff-4a6d-9bfa-f9e046c69d4a',
-        fields: {
-            name: 'R2-D2'
-        }
-    }
-], {
-    writeEvents: false // defaults to true
-})
+    ],
+    mutationOptions // optional
+)
 ```
 
 > Triggers following events:
@@ -122,12 +151,13 @@ const [lukeSkywalker, r2d2] = await client.persons.update([
 ## Delete records
 
 ```js
-const [lukeSkywalker, r2d2] = await client.persons.delete([
-    'fa382609-4453-410c-a13f-728804e56ed3',
-    '8cc17b4b-3eff-4a6d-9bfa-f9e046c69d4a'
-], {
-    writeEvents: false // defaults to true
-})
+const [lukeSkywalker, r2d2] = await client.persons.delete(
+    [
+        'fa382609-4453-410c-a13f-728804e56ed3',
+        '8cc17b4b-3eff-4a6d-9bfa-f9e046c69d4a'
+    ],
+    mutationOptions // optional
+)
 ```
 
 > Triggers following events:
