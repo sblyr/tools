@@ -48,9 +48,9 @@ Response:
         "HousingContract": [
             "002c014b-6f33-4358-87d7-ba61994ae5ba",
             "8aeb4944-69b6-4e37-9310-9a69b80ca7a8",
-            ...
+            // ...
         ],
-        "ModelDatas": {
+        "HousingContractDatas": {
             "002c014b-6f33-4358-87d7-ba61994ae5ba": {
                 "id": "002c014b-6f33-4358-87d7-ba61994ae5ba",
                 "address": "Broadway",
@@ -61,7 +61,7 @@ Response:
                 "address": "Abbey Road",
                 "signer": "9761d0dc-d005-4c34-85db-65146417231b"
             },
-            ...
+            // ...
         },
         "Signer": [
             "9761d0dc-d005-4c34-85db-65146417231b"
@@ -87,7 +87,7 @@ Response:
         "HousingContract": [
             "002c014b-6f33-4358-87d7-ba61994ae5ba"
         ],
-        "ModelDatas": {
+        "HousingContractDatas": {
             "002c014b-6f33-4358-87d7-ba61994ae5ba": {
                 "id": "002c014b-6f33-4358-87d7-ba61994ae5ba",
                 "address": "Broadway",
