@@ -16,7 +16,10 @@
     - [Currency](#currency)
     - [Percentage](#percentage)
     - [Progress Bar](#progress-bar)
-  - [Single select](#single-select)
+  - [Select](#select)
+    - [Single select](#single-select)
+    - [Multiple select](#multiple-select)
+    - [Options with prefix / suffix](#options-with-prefix--suffix)
   - [Relationship](#relationship)
     - [Has One](#has-one)
     - [Has Many](#has-many)
@@ -26,6 +29,7 @@
   - [Date](#date)
     - [Date only](#date-only)
     - [Include time](#include-time)
+  - [Attachment](#attachment)
   - [Json](#json)
   - [Button](#button)
 
@@ -173,67 +177,87 @@ displayType: progressBar
 # output: [=====     ] 50%
 ```
 
-## Single select
+## Select
+
+| setting | description |
+| --- | --- |
+| type | Type of select. Possible values: `single`, `multiple`. Defaults to `single`. |
+| expanded | Whether to make the values take up more space in the cell when being displayed. Defaults to `false`. |
+| coloredOptions | Whether the options should appear colored or not. Defaults to `true`. |
+| options | List of options |
+
+Option properties:
+| property | description |
+| --- | --- |
+|  id | Unique identifier for the option |
+|  name | Display name for the option |
+|  description | Longer description of the option |
+|  color | Define a color for the option. Either a preset: `blue`, `green`, `red`, `pink`, `yellow`. Or you can define your own colors by passing an object (see down below). By default each option will get a default color for it's index. |
+
+Custom color
+```yaml
+color:
+  backgroundColor: "#cfdfff"
+  color: "#102046"
+```
+
+### Single select
 
 ```yaml
 id: formatOwned
 name: Format Owned
-type: singleSelect
+type: select
 settings:
-    options: 
-        - id: paperback
-          color: blue
-        - id: hardback
-          color: green
-        - id: need_a_copy
-          color: gray
+  type: single
+  options: 
+    - id: paperback
+      color: blue
+    - id: hardback
+      color: green
+    - id: need_a_copy
+      color: gray
+```
+
+### Multiple select
+
+```yaml
+id: formatOwned
+name: Format Owned
+type: select
+settings:
+  type: multiple
+  options: 
+    - id: paperback
+      color: blue
+    - id: hardback
+      color: green
+    - id: need_a_copy
+      color: gray
 ```
 
 When you specify the color property the schema will output a predefined backgroundColor, color based on your input. Alternatively you can define the backgroundColor / color yourself.
 
-Output:
-```json
-{
-  "id": "formatOwned",
-  "name": "Format Owned",
-  "type": "singleSelect",
-  "settings": {
-    "options": [
-      {
-        "id": "paperback",
-        "backgroundColor": "#cfdfff",
-        "color": "#102046"
-      },
-      {
-        "id": "hardback",
-        "backgroundColor": "#d0f0fd",
-        "color": "#04283f"
-      },
-      {
-        "id": "need_a_copy",
-        "backgroundColor": "#ccc",
-        "color": "#040404"
-      }
-    ]
-  }
-}
-```
-
-Options with prefix / suffix
+### Options with prefix / suffix
 
 ```yaml
 id: weatherType
 name: Weather Type
-type: singleSelect
+type: select
 settings:
-    options: 
-        - id: rainy
-          prefix: 🌧
-        - id: sunny
-          prefix: ☀️
+  type: single
+  options: 
+    - id: rainy
+      prefix: 🌧
+    - id: sunny
+      prefix: ☀️
 ```
 
 ## Relationship
+
+| setting | description |
+| --- | --- |
+| type | Type of relationship. Possible value: `hasOne`, `hasMany`. Defaults to `hasOne`. |
+| foreignTable | The foreign table of the records being referenced. |
 
 ### Has One
 
@@ -262,6 +286,12 @@ data:
 
 ## Boolean
 
+| setting | description |
+| --- | --- |
+| ui | How the field should be displayed. Possible values: `checkbox`, `toggle`. Defaults to `checkbox`. |
+| trueLabel | A label to be displayed when the value is `true`. Defaults to `null`. |
+| falseLabel | A label to be displayed when the value is `false`. Defaults to `null`. |
+
 ### Checkbox
 
 ```yaml
@@ -280,8 +310,15 @@ settings:
   ui: toggle
 ```
 
-
 ## Date
+
+| setting | description |
+| --- | --- |
+| includeTime | Whether to display the time. Defaults to `false` |
+| dateFormat | Format to display the date in. Defaults to `european`. Possible values: `iso` (`YYYY-MM-DD`), `european` (`DD/MM/YYYY`), `friendly` (`D MMMM YYYY`, 16 November 2018). It's also possible to enter a custom format. |
+| timeFormat | Format to display the time in. Defaults to `24`. Possible values: `24`, `12`. It's also possible to enter a custom format. |
+
+> When you don't want to make use of the `dateFormat`, `timeFormat` defaults you can enter a custom format. The date field makes use of the [Moment.js](https://momentjs.com/) library for date formatting.
 
 ### Date only
 
@@ -302,6 +339,19 @@ type: date
 settings:
   includeTime: true
 ```
+
+## Attachment
+
+```yaml
+id: upload
+type: attachment
+settings:
+  type: single
+```
+
+| setting | description |
+| --- | --- |
+| type | Possible values: `single`, `multiple`. Defaults to `single` |
 
 ## Json
 
