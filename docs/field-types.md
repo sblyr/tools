@@ -242,7 +242,7 @@ id: relationship_hasOne
 type: relationship
 settings:
   type: hasOne
-  foreignModel: Author
+  foreignTable: Author
 ```
 
 ### Has Many
@@ -253,7 +253,7 @@ name: Popular Authors
 type: relationship
 settings:
   type: hasMany
-  foreignModel: Author
+  foreignTable: Author
 data:
   query: WHERE popularity > 5 ORDER BY popularity DESC
   bindings:

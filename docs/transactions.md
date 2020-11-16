@@ -14,7 +14,7 @@ This action will create two operations:
 const createTransaction = require('@sublayer/tools/transaction/createTransaction')
 
 const schema = {
-    ModelDatas: {
+    TableDatas: {
         Person: {
             id: "Person",
             fields: [
@@ -33,14 +33,14 @@ const schema = {
             ]
         }
     },
-    Model: [
+    TableDatas: [
         "Person"
     ]
 }
 
 const result = createTransaction(ctx)({
     type: "create",
-    modelId: "Person",
+    tableId: "Person",
     data: {
         firstName: "Luke",
         lastName: "Skywalker"
@@ -55,8 +55,8 @@ Result:
         {
             type: "insert",
             payload: {
-                entityType: "Person",
-                entityId: "0106c862-db09-4060-97fb-8716997b0c21",
+                tableId: "Person",
+                recordId: "0106c862-db09-4060-97fb-8716997b0c21",
                 entity: {
                     id: "0106c862-db09-4060-97fb-8716997b0c21",
                     firstName: "Luke",
@@ -68,16 +68,16 @@ Result:
         {
             type: "insert",
             payload: {
-                entityType: "Event",
-                entityId: "86910eef-ddad-4147-9ccd-7878b5341a0a",
+                tableId: "Event",
+                recordId: "86910eef-ddad-4147-9ccd-7878b5341a0a",
                 entity: {
                     id: "86910eef-ddad-4147-9ccd-7878b5341a0a",
                     type: "Person:created",
-                    entityType: "Person",
-                    entityId: "0106c862-db09-4060-97fb-8716997b0c21",
+                    tableId: "Person",
+                    recordId: "0106c862-db09-4060-97fb-8716997b0c21",
                     payload: {
-                        entityType: "Person",
-                        entityId: "0106c862-db09-4060-97fb-8716997b0c21",
+                        tableId: "Person",
+                        recordId: "0106c862-db09-4060-97fb-8716997b0c21",
                         entity: {
                             id: "0106c862-db09-4060-97fb-8716997b0c21",
                             firstName: "Luke",
@@ -102,7 +102,7 @@ This action will create two (or more based on the fields that have been changed)
 const createTransaction = require('@sublayer/tools/transaction/createTransaction')
 
 const schema = {
-    ModelDatas: {
+    TableDatas: {
         Person: {
             id: "Person",
             fields: [
@@ -121,14 +121,14 @@ const schema = {
             ]
         }
     },
-    Model: [
+    Table: [
         "Person"
     ]
 }
 
 const result = createTransaction(ctx)({
     type: "update",
-    modelId: "Person",
+    tableId: "Person",
     data: {
         id: "0106c862-db09-4060-97fb-8716997b0c21",
         firstName: "Anakin"
@@ -143,8 +143,8 @@ Result:
         {
             type: "update",
             payload: {
-                entityType: "Person",
-                entityId: "0106c862-db09-4060-97fb-8716997b0c21",
+                tableId: "Person",
+                recordId: "0106c862-db09-4060-97fb-8716997b0c21",
                 entity: {
                     firstName: "Anakin"
                 }
@@ -153,16 +153,16 @@ Result:
         {
             type: "insert",
             payload: {
-                entityType: "Event",
-                entityId: "86910eef-ddad-4147-9ccd-7878b5341a0a",
+                tableId: "Event",
+                recordId: "86910eef-ddad-4147-9ccd-7878b5341a0a",
                 entity: {
                     id: "86910eef-ddad-4147-9ccd-7878b5341a0a",
                     type: "Person:firstName:changed",
-                    entityType: "Person",
-                    entityId: "0106c862-db09-4060-97fb-8716997b0c21",
+                    tableId: "Person",
+                    recordId: "0106c862-db09-4060-97fb-8716997b0c21",
                     payload: {
-                        entityType: "Person",
-                        entityId: "0106c862-db09-4060-97fb-8716997b0c21",
+                        tableId: "Person",
+                        recordId: "0106c862-db09-4060-97fb-8716997b0c21",
                         entity: {
                             id: "0106c862-db09-4060-97fb-8716997b0c21",
                             firstName: "Anakin",
@@ -179,16 +179,16 @@ Result:
         {
             type: "insert",
             payload: {
-                entityType: "Event",
-                entityId: "86910eef-ddad-4147-9ccd-7878b5341a0a",
+                tableId: "Event",
+                recordId: "86910eef-ddad-4147-9ccd-7878b5341a0a",
                 entity: {
                     id: "86910eef-ddad-4147-9ccd-7878b5341a0a",
                     type: "Person:updated",
-                    entityType: "Person",
-                    entityId: "0106c862-db09-4060-97fb-8716997b0c21",
+                    tableId: "Person",
+                    recordId: "0106c862-db09-4060-97fb-8716997b0c21",
                     payload: {
-                        entityType: "Person",
-                        entityId: "0106c862-db09-4060-97fb-8716997b0c21",
+                        tableId: "Person",
+                        recordId: "0106c862-db09-4060-97fb-8716997b0c21",
                         previousEntity: {
                             id: "0106c862-db09-4060-97fb-8716997b0c21",
                             firstName: "Luke",
@@ -225,7 +225,7 @@ This action will create two operations:
 const createTransaction = require('@sublayer/tools/transaction/createTransaction')
 
 const schema = {
-    ModelDatas: {
+    TableDatas: {
         Person: {
             id: "Person",
             fields: [
@@ -244,14 +244,14 @@ const schema = {
             ]
         }
     },
-    Model: [
+    Table: [
         "Person"
     ]
 }
 
 const result = createTransaction(ctx)({
     type: "remove",
-    modelId: "Person",
+    tableId: "Person",
     data: {
         id: "0106c862-db09-4060-97fb-8716997b0c21",
         firstName: "Anakin"
@@ -266,23 +266,23 @@ Result:
         {
             type: "remove",
             payload: {
-                entityType: "Person",
-                entityId: "0106c862-db09-4060-97fb-8716997b0c21"
+                tableId: "Person",
+                recordId: "0106c862-db09-4060-97fb-8716997b0c21"
             } 
         },
         {
             type: "insert",
             payload: {
-                entityType: "Event",
-                entityId: "86910eef-ddad-4147-9ccd-7878b5341a0a",
+                tableId: "Event",
+                recordId: "86910eef-ddad-4147-9ccd-7878b5341a0a",
                 entity: {
                     id: "86910eef-ddad-4147-9ccd-7878b5341a0a",
                     type: "Person:removed",
-                    entityType: "Person",
-                    entityId: "0106c862-db09-4060-97fb-8716997b0c21",
+                    tableId: "Person",
+                    recordId: "0106c862-db09-4060-97fb-8716997b0c21",
                     payload: {
-                        entityType: "Person",
-                        entityId: "0106c862-db09-4060-97fb-8716997b0c21",
+                        tableId: "Person",
+                        recordId: "0106c862-db09-4060-97fb-8716997b0c21",
                         entity: {
                             id: "0106c862-db09-4060-97fb-8716997b0c21",
                             firstName: "Luke",

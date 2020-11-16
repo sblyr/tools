@@ -5,8 +5,8 @@ Using the [Schema](/docs/schema.md) and [Hooks](/docs/hooks.md) an API can be au
 | endpoint | description |
 | --- | --- |
 | GET /v0/schema | Retrieve schema |
-| GET /v0/:modelSlug | List records |
-| GET /v0/:modelSlug/:recordId | Retrieve a record |
+| GET /v0/:tableSlug | List records |
+| GET /v0/:tableSlug/:recordId | Retrieve a record |
 
 
 **Normalized responses**
@@ -20,10 +20,10 @@ Response:
 {
     "data": [
         {
-            "Model": [
+            "Table": [
                 "HousingContract"
             ],
-            "ModelDatas": {
+            "TableDatas": {
                 "HousingContract": {
                     "id": "HousingContract",
                     "fields": [

@@ -14,7 +14,7 @@ const createStatements = require('@sublayer/tools/storage/mysql/createStatements
 const db = require('./db')
 
 const schema = {
-    ModelDatas: {
+    TableDatas: {
         Event: {
             id: "Event",
             fields: [
@@ -27,11 +27,11 @@ const schema = {
                     type: "text"
                 },
                 {
-                    id: "entityType",
+                    id: "tableId",
                     type: "text"
                 },
                 {
-                    id: "entityId",
+                    id: "recordId",
                     type: "text"
                 },
                 {
@@ -59,7 +59,7 @@ const schema = {
             ]
         }
     },
-    Model: [
+    Table: [
         "Person",
         "Event"
     ]
@@ -72,7 +72,7 @@ const ctx = {
 
 const transaction = createTransaction(ctx)({
     type: "update",
-    modelId: "Person",
+    tableId: "Person",
     data: {
         id: "0106c862-db09-4060-97fb-8716997b0c21",
         firstName: "Anakin"
@@ -117,9 +117,9 @@ Statements:
         bindings: {
             id: "86910eef-ddad-4147-9ccd-7878b5341a0a",
             type: "Person:created",
-            entityType: "Person",
-            entityId: "0106c862-db09-4060-97fb-8716997b0c21",
-            payload: "{\"entityType\":\"Person\",\"entityId\":\"0106c862-db09-4060-97fb-8716997b0c21\",\"entity\":{\"id\":\"0106c862-db09-4060-97fb-8716997b0c21\",\"firstName\":\"Luke\",\"lastName\":\"Skywalker\",\"name\":\"Luke Skywalker\"}}"
+            tableId: "Person",
+            recordId: "0106c862-db09-4060-97fb-8716997b0c21",
+            payload: "{\"tableId\":\"Person\",\"recordId\":\"0106c862-db09-4060-97fb-8716997b0c21\",\"entity\":{\"id\":\"0106c862-db09-4060-97fb-8716997b0c21\",\"firstName\":\"Luke\",\"lastName\":\"Skywalker\",\"name\":\"Luke Skywalker\"}}"
         }
     }
 ]
