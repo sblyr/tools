@@ -33,7 +33,9 @@ const [lukeSkywalker, r2d2] = await client.persons.create([
             name: 'R2-D2
         }
     }
-])
+], {
+    writeEvents: false // defaults to true
+})
 ```
 
 > Triggers following events:
@@ -62,7 +64,7 @@ const [record] = await client.persons.read({
 ### MongoDB
 
 ```js
-import { ObjectId } from 'mongo'
+const { ObjectId } = require('mongodb')
 
 const [record] = await client.persons.read({
     '_id': ObjectId('4ecc05e55dd98a436ddcc47c')
@@ -106,7 +108,9 @@ const [lukeSkywalker, r2d2] = await client.persons.update([
             name: 'R2-D2'
         }
     }
-])
+], {
+    writeEvents: false // defaults to true
+})
 ```
 
 > Triggers following events:
@@ -121,7 +125,9 @@ const [lukeSkywalker, r2d2] = await client.persons.update([
 const [lukeSkywalker, r2d2] = await client.persons.delete([
     'fa382609-4453-410c-a13f-728804e56ed3',
     '8cc17b4b-3eff-4a6d-9bfa-f9e046c69d4a'
-])
+], {
+    writeEvents: false // defaults to true
+})
 ```
 
 > Triggers following events:
