@@ -4,9 +4,13 @@ Using the [Schema](/docs/schema.md) and [Hooks](/docs/hooks.md) an API can be au
 
 | endpoint | description |
 | --- | --- |
-| GET /v0/schema | Retrieve schema |
-| GET /v0/:tableSlug | List records |
-| GET /v0/:tableSlug/:recordId | Retrieve a record |
+| `GET /v0/schema` | Retrieve schema |
+| `GET /v0/:tableSlug` | List records |
+| `GET /v0/:tableSlug/:recordId` | Retrieve a record |
+| `POST /v0/:tableSlug` | Create records |
+| `PATCH /v0/:tableSlug` | Update records, update the fields you specify, leaving the rest as they were |
+| `PUT /v0/:tableSlug` | Update records, will perform a destructive update and clear all unspecified cell values |
+| `DELETE /v0/:tableSlug` | Delete records |
 
 
 **Normalized responses**
