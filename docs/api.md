@@ -13,7 +13,6 @@ Using the [Schema](/docs/schema.md) and [Hooks](/docs/hooks.md) an API can be au
 | `PUT /v0/:tableSlug` | Update records, will perform a destructive update and clear all unspecified cell values |
 | `DELETE /v0/:tableSlug` | Delete records |
 
-
 **Normalized responses**
 Most responses contain a normalized response. This might be counter-intuitive at first but, since normally related data is nested inside each object. But it allows for smaller response sizes and takes away the need to transform the data to store it inside a Redux store.
 
