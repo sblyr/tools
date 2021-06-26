@@ -3,6 +3,7 @@ const uuid = require('uuid')
 const isArray = require('lodash/isArray')
 const isUndefined = require('lodash/isUndefined')
 
+
 const defaultFieldTypeResolver = () => () => null
 
 const getFieldTypeResolver = type => {
