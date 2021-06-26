@@ -1,6 +1,7 @@
 const assert = require('assert')
 const uuid = require('uuid')
 const isArray = require('lodash/isArray')
+const isUndefined = require('lodash/isUndefined')
 
 const defaultFieldTypeResolver = () => () => null
 
@@ -50,7 +51,7 @@ const getData = ctx => (model, input) => {
 
         data[id] = value
 
-        if (input[id]) {
+        if (!isUndefined(input[id])) {
             data[id] = input[id]
         }
 
