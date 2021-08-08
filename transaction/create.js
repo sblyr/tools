@@ -73,7 +73,7 @@ const getData = ctx => (model, input) => {
     }, {})
 }
 
-const create = ctx => ({ modelId, data: input = {} }) => {
+const create = ctx => ({ modelId, data: input = {}, includeEvents = false }) => {
 
     let operations = []
 
@@ -91,7 +91,7 @@ const create = ctx => ({ modelId, data: input = {} }) => {
         }
     })
 
-    if (modelId !== "Event") {
+    if (includeEvents && modelId !== "Event") {
 
         const createEventTransaction = create(ctx)({
             modelId: "Event",
