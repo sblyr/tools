@@ -1,9 +1,8 @@
 version: "3"
 
 services:
-
   tools:
-    image: node:10
+    image: node:14
     # environment:
     #   - DEBUG=*
     working_dir: /app

@@ -146,7 +146,8 @@ describe('Integration Tests', () => {
                 modelId: "Subscription",
                 data: {
                     customerId: "f33ffdea-1adc-40e6-8117-38e7fd359259"
-                }
+                },
+                includeEvents: true
             })
 
             expect(transaction).toMatchObject({

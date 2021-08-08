@@ -82,7 +82,8 @@ describe('Transaction', () => {
                 data: {
                     firstName: 'Luke',
                     lastName: 'Skywalker'
-                }
+                },
+                includeEvents: true
             })
 
             console.log(JSON.stringify(result, null, 2))

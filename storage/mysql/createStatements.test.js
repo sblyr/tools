@@ -282,7 +282,8 @@ describe('Storage', () => {
                     data: {
                         firstName: 'Luke',
                         lastName: 'Skywalker'
-                    }
+                    },
+                    includeEvents: true
                 })
 
                 const statements = createStatements(ctx)(transaction)
