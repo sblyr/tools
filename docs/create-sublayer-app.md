@@ -33,10 +33,10 @@ docker-compose.yaml
 
 1. With every push to `master` tag the repository with a new release tag based on the commits that have been done.
 2. With every new release tag:
-   1. Build the Docker image for the application 
+   1. Build the Docker image for the application
    2. Push the Docker image to a registry
    3. Update Kubernetes Deployment with the latest image
-   4. Apply the updated Kubernetes Deployment to the cluster. 
+   4. Apply the updated Kubernetes Deployment to the cluster.
 
 ### Versioning info
 
